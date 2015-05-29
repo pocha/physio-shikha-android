@@ -41,7 +41,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    compileSdkVersion 22
+    compileSdkVersion 'android-MNC'
     buildToolsVersion "21.1.2"
 
     packagingOptions {
@@ -51,7 +51,7 @@ android {
     defaultConfig {
         applicationId "com.jaspervanriet.huntingthatproduct"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 'MNC'
         versionCode 21
         versionName "2.0.1"
     }
@@ -64,12 +64,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:support-v4:22.2.0'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.pnikosis:materialish-progress:1.5'
-    compile 'com.android.support:cardview-v7:22.1.1'
-    compile 'com.android.support:recyclerview-v7:22.1.1'
+    compile 'com.android.support:cardview-v7:22.2.0'
+    compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.johnkil.android-robototextview:robototextview:2.4.0'
     compile('de.psdev.licensesdialog:licensesdialog:1.7.0') {
