@@ -22,20 +22,19 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.jaspervanriet.huntingthatproduct.Data.Settings.AppSettings;
 import com.jaspervanriet.huntingthatproduct.R;
 import com.jaspervanriet.huntingthatproduct.Views.Activities.Settings.SettingsActivity;
-import com.jaspervanriet.huntingthatproduct.Views.Adapters.DrawerAdapter;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.PicassoTools;
 
@@ -47,10 +46,10 @@ import butterknife.InjectView;
  */
 public class DrawerActivity extends AppCompatActivity {
 
-	public static final int NAVDRAWER_ITEM_TODAYS_PRODUCTS = 0;
-	public static final int NAVDRAWER_ITEM_SETTINGS = 2;
-	public static final int NAVDRAWER_ITEM_ABOUT = 3;
-	public static final int NAVDRAWER_ITEM_COLLECTIONS = 1;
+	public static final int NAVDRAWER_ITEM_TODAYS_PRODUCTS = R.id.navigation_item_main;
+	public static final int NAVDRAWER_ITEM_COLLECTIONS = R.id.navigation_item_collections;
+	public static final int NAVDRAWER_ITEM_SETTINGS = R.id.navigation_item_prefs;
+	public static final int NAVDRAWER_ITEM_ABOUT = R.id.navigation_item_about;
 	public static final int NAVDRAWER_ITEM_INVALID = -1;
 
 	private static final int NAVDRAWER_LAUNCH_DELAY = 250;
@@ -62,8 +61,8 @@ public class DrawerActivity extends AppCompatActivity {
 	DrawerLayout mDrawer;
 	@InjectView (R.id.toolbar)
 	Toolbar mToolBar;
-	@InjectView (R.id.drawer_list)
-	ListView mDrawerList;
+	@InjectView (R.id.nav_drawer)
+	NavigationView mDrawerView;
 
 	@Override
 	public void setContentView (int layoutResID) {
@@ -92,16 +91,14 @@ public class DrawerActivity extends AppCompatActivity {
 	}
 
 	private void setupDrawerList () {
-		String[] mDrawerData = getResources ().getStringArray (R.array.drawer_items);
-		DrawerAdapter drawerAdapter = new DrawerAdapter (this,
-				mDrawerData, getSelfNavDrawerItem ());
-		mDrawerList.setAdapter (drawerAdapter);
-		mDrawerList.setOnItemClickListener ((parent, view, position, id) -> onDrawerItemClicked
-				(position));
+		mDrawerView.setNavigationItemSelectedListener (menuItem -> {
+			onDrawerItemClicked (menuItem);
+			return true;
+		});
 	}
 
-	private void onDrawerItemClicked (final int item) {
-		if (!(item == getSelfNavDrawerItem ())) {
+	private void onDrawerItemClicked (MenuItem item) {
+		if (!(item.getItemId () == getSelfNavDrawerItem ())) {
 			// Wait for drawer to close before starting activity
 			mHandler.postDelayed (() -> goToNavDrawerItem (item), NAVDRAWER_LAUNCH_DELAY);
 		}
@@ -112,9 +109,9 @@ public class DrawerActivity extends AppCompatActivity {
 		return mToolBar;
 	}
 
-	private void goToNavDrawerItem (int item) {
+	private void goToNavDrawerItem (MenuItem item) {
 		Intent intent;
-		switch (item) {
+		switch (item.getItemId ()) {
 			case NAVDRAWER_ITEM_TODAYS_PRODUCTS:
 				intent = new Intent (this, MainActivity.class);
 				intent.putExtra ("toolbar_animation", false);
@@ -145,7 +142,7 @@ public class DrawerActivity extends AppCompatActivity {
 
 	protected void closeNavDrawer () {
 		if (mDrawer != null) {
-			mDrawer.closeDrawer (Gravity.START);
+			mDrawer.closeDrawer (GravityCompat.START);
 		}
 	}
 
@@ -154,8 +151,12 @@ public class DrawerActivity extends AppCompatActivity {
 	}
 
 	protected void setToolBar () {
-		String[] drawerData = getResources ().getStringArray (R.array
-				.drawer_items);
+		String[] drawerData = {
+				getString (R.string.drawer_main),
+				getString (R.string.drawer_collections),
+				getString (R.string.drawer_prefs),
+				getString (R.string.drawer_about)
+		};
 		setSupportActionBar (mToolBar);
 		ActionBar actionBar = getSupportActionBar ();
 		actionBar.setElevation (5);

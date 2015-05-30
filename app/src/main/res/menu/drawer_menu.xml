@@ -16,8 +16,27 @@
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-    <declare-styleable name="ScrimInsetsView">
-        <attr name="insetForeground" format="reference|color"/>
-    </declare-styleable>
-</resources>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item
+		android:id="@+id/navigation_item_main"
+		android:checked="true"
+		android:title="@string/drawer_main"
+		/>
+	<item
+		android:id="@+id/navigation_item_collections"
+		android:checked="true"
+		android:title="@string/drawer_collections"
+		/>
+	<item
+		android:id="@+id/navigation_item_prefs"
+		android:checked="true"
+		android:title="@string/drawer_prefs"
+		/>
+	<item
+		android:id="@+id/navigation_item_about"
+		android:checked="true"
+		android:title="@string/drawer_about"
+		/>
+
+</menu>

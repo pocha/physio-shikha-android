@@ -42,7 +42,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     compileSdkVersion 'android-MNC'
-    buildToolsVersion "21.1.2"
+    buildToolsVersion "22.0.1"
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
@@ -64,8 +64,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.android.support:design:22.2.0'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.pnikosis:materialish-progress:1.5'
     compile 'com.android.support:cardview-v7:22.2.0'

@@ -37,12 +37,10 @@
 
     <string name="actionbar_loading">Loading…</string>
 
-    <string-array name="drawer_items">
-        <item>Products</item>
-        <item>Collections</item>
-        <item>Settings</item>
-        <item>About</item>
-    </string-array>
+	<string name="drawer_main">Products</string>
+	<string name="drawer_collections">Collections</string>
+	<string name="drawer_prefs">Settings</string>
+	<string name="drawer_about">About</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>
