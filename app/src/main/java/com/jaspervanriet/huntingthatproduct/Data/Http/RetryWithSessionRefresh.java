@@ -19,8 +19,6 @@ package com.jaspervanriet.huntingthatproduct.Data.Http;
 
 import android.os.AsyncTask;
 
-import org.apache.http.HttpStatus;
-
 import retrofit.RetrofitError;
 import rx.Observable;
 import rx.functions.Func1;
@@ -50,8 +48,7 @@ public class RetryWithSessionRefresh implements
 						// Retry once
 						if (retryCount <= 1 && throwable instanceof RetrofitError) {
 							final RetrofitError retrofitError = (RetrofitError) throwable;
-							if (!retrofitError.isNetworkError ()
-									&& retrofitError.getResponse ().getStatus () == HttpStatus.SC_UNAUTHORIZED) {
+							if (retrofitError.getKind () == RetrofitError.Kind.HTTP) {
 								return sessionSerivce
 										.askForToken ()
 										.doOnNext (accessTokenProvider::setSessionToken)
